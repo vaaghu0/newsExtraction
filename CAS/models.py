@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 class BaseModel(models.Model):
   is_deleted = models.BooleanField(default=False)
   
@@ -6,20 +7,30 @@ class BaseModel(models.Model):
   updated_at = models.DateTimeField(auto_now=True)
   deleted_at = models.DateTimeField(null=True, blank=True)
 
-  created_by = models.CharField(max_length=300)
-  updated_by = models.CharField(max_length=300, null=True, blank=True)
-  deleted_by = models.CharField(max_length=300, null=True, blank=True)
+  class Meta:
+    abstract = True
 
-class CasDocument(BaseModel):
-  name = models.CharField(250)
-  password = models.TextField()
+class cas_document(BaseModel):
+  id = models.UUIDField(primary_key = True, default=uuid.uuid4, editable=False)
+  name = models.CharField(max_length = 250)
+  password = models.CharField(max_length = 200)
+  class Meta:
+    db_table = "cas_documents"
+    verbose_name = "Document"
+    verbose_name_plural = "Documents"
 
-class CasSummary(BaseModel):
+class cas_summary(BaseModel):
+  id = models.UUIDField(primary_key = True, default=uuid.uuid4, editable=False)
   fund = models.TextField()
-  folio = models.TextField()
   closing_balance = models.FloatField()
   invested = models.FloatField()
   allocation = models.FloatField()
-  nav_date = models.DateField()
-  advisor = models.TextField()
-  casDocument = models.ForeignKey(CasDocument, related_name = "summary")
+  folio = models.TextField(blank = True, null=True)
+  nav_date = models.DateField(blank = True, null=True)
+  advisor = models.TextField(blank = True, null=True)
+  casDocument = models.ForeignKey(cas_document, related_name = "summary", on_delete=models.CASCADE)
+
+  class Meta:
+    db_table = "cas_summary"
+    verbose_name = "Summary"
+    verbose_name_plural = "Summaries"

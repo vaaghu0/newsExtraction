@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'cas.apps.CasConfig',
     'newsExtraction.apps.NewsextractionConfig',
     'django.contrib.admin',
     'django.contrib.auth',
