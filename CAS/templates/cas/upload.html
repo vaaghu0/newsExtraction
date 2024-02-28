@@ -1,0 +1,18 @@
+<form
+  method="post"
+  enctype="multipart/form-data"
+  style="
+    display: flex;
+    flex-direction: column;
+    justy-content: center;
+    align-items: center;
+  ">
+  {% csrf_token %}
+  <input type="file" accept="application/pdf" name="files" required />
+  <input
+    type="password"
+    name="password"
+    placeholder="enter password"
+    required />
+  <button type="submit">Upload</button>
+</form>
