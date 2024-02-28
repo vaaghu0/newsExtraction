@@ -98,7 +98,7 @@ def cams(text):
     obj = stringToDigit(obj)
 
     new_df = pd.DataFrame(data=obj,index=[i])
-    print(obj)
+    # print(obj)
     #pandas
     if isinstance(old_df,pd.DataFrame):
       old_df = pd.concat([old_df,new_df],axis=0)
