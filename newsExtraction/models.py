@@ -37,3 +37,5 @@ class News(BaseModel):
         verbose_name = "news"
         verbose_name_plural = "news"
 
+# class Embedding(BaseModel):
+    
