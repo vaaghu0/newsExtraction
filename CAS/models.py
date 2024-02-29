@@ -11,8 +11,8 @@ class BaseModel(models.Model):
     abstract = True
 
 class cas_document(BaseModel):
-  id = models.UUIDField(primary_key = True, default=uuid.uuid4, editable=False)
-  name = models.CharField(max_length = 250)
+  id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
+  name = models.CharField(max_length = 250, unique = True)
   # password = models.CharField(max_length = 200)
   class Meta:
     db_table = "cas_documents"

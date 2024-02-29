@@ -3,6 +3,7 @@ import pandas as pd
 import re
 from ..models import cas_document,cas_summary
 
+from django.db import IntegrityError, transaction
 
 def stringToDigit(obj):
   listOfDigits = ["invested","current_value", "closing_balance"]
@@ -124,9 +125,6 @@ def main(file, password:str, fileType:str = "cams"):
         full_text += page.extract_text()
   except:
     pass
-  
-  # doc = cas_document(name = "".join(file.name.split(".")[:-1]))
-  # doc.save()
 
   match(fileType):
     case 'paytm':
@@ -152,12 +150,16 @@ def main(file, password:str, fileType:str = "cams"):
   except:
     print("couldn't able to create allocation")
     pass
-
-  # records = old_df.to_dict(orient="records")
-  # model_instances = [cas_summary(
-  #   **record,
-  #   document = doc
-  # ) for record in records]
-  # cas_summary.objects.bulk_create(model_instances)
-  
+  try:
+    with transaction.atomic():
+      doc = cas_document(name = "".join(file.name.split(".")[:-1]))
+      doc.save()
+      records = old_df.to_dict(orient="records")
+      model_instances = [cas_summary(
+        **record,
+        document = doc
+      ) for record in records]
+      cas_summary.objects.bulk_create(model_instances)
+  except IntegrityError:
+    pass
   return old_df.to_csv()
