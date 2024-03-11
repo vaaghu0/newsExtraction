@@ -22,19 +22,19 @@ jobs:
       - name: Check Django Errors
         run: |
           cd dev
-          /home/ubuntu/.local/bin/poetry python3 manage.py check
+          /home/ubuntu/.local/bin/poetry python manage.py check
           
 
       - name: Generating Django Migrations Files
         run: |
           cd dev
-          /home/ubuntu/.local/bin/poetry python3 manage.py makemigrations
+          /home/ubuntu/.local/bin/poetry python manage.py makemigrations
 
 
       - name: Migrating Changes to Database
         run: |
           cd dev
-          /home/ubuntu/.local/bin/poetry python3 manage.py migrate
+          /home/ubuntu/.local/bin/poetry python manage.py migrate
 
       - name: Restart vittae Service
         run: sudo systemctl restart vittae-scrapping-dev.service
