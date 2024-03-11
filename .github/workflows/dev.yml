@@ -17,30 +17,24 @@ jobs:
       - name: Activate Virtualenv & Installing Requirements
         run: |
           cd dev
-          source /home/ubuntu/scrapping/venv/bin/activate
-          pip install -r requirements.txt
-          deactivate
+          /home/ubuntu/.local/bin/poetry install --sync
 
       - name: Check Django Errors
         run: |
           cd dev
-          source /home/ubuntu/scrapping/venv/bin/activate
-          python manage.py check
-          deactivate
+          /home/ubuntu/.local/bin/poetry python manage.py check
+          
 
       - name: Generating Django Migrations Files
         run: |
           cd dev
-          source /home/ubuntu/scrapping/venv/bin/activate
-          python manage.py makemigrations
-          deactivate
+          /home/ubuntu/.local/bin/poetry python manage.py makemigrations
+
 
       - name: Migrating Changes to Database
         run: |
           cd dev
-          source /home/ubuntu/scrapping/venv/bin/activate
-          python manage.py migrate
-          deactivate
+          /home/ubuntu/.local/bin/poetry python manage.py migrate
 
       - name: Restart vittae Service
         run: sudo systemctl restart vittae-scrapping-dev.service
