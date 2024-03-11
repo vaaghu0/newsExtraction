@@ -2,7 +2,7 @@
 name = "news"
 version = "0.1.0"
 description = ""
-authors = ["vaaghu <vignesh021102@gmail.com>"]
+authors = ["vaaghu <vaaghu@vittae.money>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
