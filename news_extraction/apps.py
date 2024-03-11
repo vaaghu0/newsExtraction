@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class NewsextractionConfig(AppConfig):
+class NewsExtractionConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'newsExtraction'
+    name = 'news_extraction'

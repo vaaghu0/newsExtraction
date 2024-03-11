@@ -14,12 +14,12 @@ jobs:
         with:
           path: 'dev'
 
-      - name: Activate Virtualenv & Installing Requirements
+      - name: Installing Requirements
         run: |
           cd dev
-          /home/ubuntu/.local/bin/poetry install --sync
+          /home/ubuntu/.local/bin/poetry install --only main --sync
 
-      - name: Check Django Errors
+      - name: Checking Django Errors
         run: |
           cd dev
           /home/ubuntu/.local/bin/poetry run python manage.py check

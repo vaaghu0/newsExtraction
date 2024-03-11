@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     'django_extensions',
     "rest_framework",
 
-    "CAS",
-    "newsExtraction"
+    "cas",
+    "news_extraction"
 ]
 
 MIDDLEWARE = [
