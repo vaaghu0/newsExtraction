@@ -36,6 +36,7 @@ jobs:
 
   deploy:
     runs-on: vittae-game
+    needs: build
     steps:
       - name: Restart vittae-scrapping Service
         run: sudo systemctl restart vittae-scrapping-dev.service
