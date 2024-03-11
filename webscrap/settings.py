@@ -31,8 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'cas.apps.CasConfig',
-    'newsExtraction.apps.NewsextractionConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     "rest_framework",
+
+    "CAS",
+    "newsExtraction"
 ]
 
 MIDDLEWARE = [
