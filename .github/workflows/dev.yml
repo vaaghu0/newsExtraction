@@ -7,6 +7,12 @@ on:
 jobs:
   build:
     runs-on: vittae-game
+    env:
+      POETRY: /home/ubuntu/.local/bin/poetry
+      DJANGO_SETTINGS_MODULE: webscrap.settings.dev
+    defaults:
+      run:
+        working-directory: dev
     
     steps:
       - name: Clone repositories
@@ -15,28 +21,23 @@ jobs:
           path: 'dev'
 
       - name: Installing Requirements
-        run: |
-          cd dev
-          /home/ubuntu/.local/bin/poetry install --only main --sync
+        run: $POETRY install --only main,server --sync
 
       - name: Checking Django Errors
-        run: |
-          cd dev
-          /home/ubuntu/.local/bin/poetry run python manage.py check
+        run: $POETRY run python manage.py check
           
 
       - name: Generating Django Migrations Files
-        run: |
-          cd dev
-          /home/ubuntu/.local/bin/poetry run python manage.py makemigrations
-
+        run: $POETRY run python manage.py makemigrations
 
       - name: Migrating Changes to Database
-        run: |
-          cd dev
-          /home/ubuntu/.local/bin/poetry run python manage.py migrate
+        run: $POETRY run python manage.py migrate
 
-      - name: Restart vittae Service
+
+  deploy:
+    runs-on: vittae-game
+    steps:
+      - name: Restart vittae-scrapping Service
         run: sudo systemctl restart vittae-scrapping-dev.service
 
       - name: Restart NGINX Server
