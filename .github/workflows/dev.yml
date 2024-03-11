@@ -1,0 +1,49 @@
+name: Development
+
+on:
+  push:
+    branches: dev
+    
+jobs:
+  build:
+    runs-on: vittae-game
+    
+    steps:
+      - name: Clone repositories
+        uses: actions/checkout@v3
+        with:
+          path: 'dev'
+
+      - name: Activate Virtualenv & Installing Requirements
+        run: |
+          cd dev
+          source /home/ubuntu/scrapping/venv/bin/activate
+          pip install -r requirements.txt
+          deactivate
+
+      - name: Check Django Errors
+        run: |
+          cd dev
+          source /home/ubuntu/scrapping/venv/bin/activate
+          python manage.py check
+          deactivate
+
+      - name: Generating Django Migrations Files
+        run: |
+          cd dev
+          source /home/ubuntu/scrapping/venv/bin/activate
+          python manage.py makemigrations
+          deactivate
+
+      - name: Migrating Changes to Database
+        run: |
+          cd dev
+          source /home/ubuntu/scrapping/venv/bin/activate
+          python manage.py migrate
+          deactivate
+
+      - name: Restart vittae Service
+        run: sudo systemctl restart vittae-scrapping-dev.service
+
+      - name: Restart NGINX Server
+        run: sudo service nginx restart
