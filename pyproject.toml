@@ -3,6 +3,7 @@ name = "news"
 version = "0.1.0"
 description = ""
 authors = ["vaaghu <vaaghu@vittae.money>"]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -17,6 +18,8 @@ djangorestframework = "^3.14.0"
 pygments = "^2.17.2"
 pandas = "^2.2.1"
 pdfplumber = "^0.10.4"
+tabula-py = "^2.9.0"
+jpype1 = "^1.5.0"
 
 
 [tool.poetry.group.server]
