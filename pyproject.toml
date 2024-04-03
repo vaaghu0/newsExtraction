@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "news"
-version = "0.1.0"
-description = ""
+version = "0.1.1"
+description = "scrapping related projects"
 authors = ["vaaghu <vaaghu@vittae.money>"]
 package-mode = false
 
